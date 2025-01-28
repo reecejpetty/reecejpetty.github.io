@@ -317,6 +317,7 @@ function createKRS() {
     const file = document.getElementById("file");
     file.style.visibility = "visible";
     file.textContent = xml;
+    sendHeightToParent();
 }
 
 // function copyKRS() {
