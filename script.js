@@ -234,6 +234,10 @@ function resetSequence() {
     const keySequence = document.getElementById("key_sequence");
     keySequence.value = "";
     currentSequence.textContent = "";
+    const error = document.getElementById("update_error");
+    if (error.style.display == "block") {
+        error.style.display = "none";
+    }
     clearModifiers();
     buildSequence = [];
 }
@@ -256,18 +260,22 @@ function updateKey() {
         const blankKey = new KeyPress("", "00", "0x00");
         buildSequence.push(blankKey);
     }
-    const newKey = new Key(buildSequence);
-    keys[index] = newKey;
-
-    // Update HTML with new key sequence
-    const cellContent = currentKey.querySelector(".cell-content");
-    const key = cellContent.querySelector(".key");
-    const modifier = cellContent.querySelector(".modifier");
-    const currentSequence = document.getElementById("current_sequence");
-    key.textContent = currentSequence.textContent; 
-
-    currentKey.style.backgroundColor = "lightgreen";
-    resetSequence();
+    if (!(buildSequence.length > 58)) {
+        const newKey = new Key(buildSequence);
+        keys[index] = newKey;
+    
+        // Update HTML with new key sequence
+        const cellContent = currentKey.querySelector(".cell-content");
+        const key = cellContent.querySelector(".key");
+        const modifier = cellContent.querySelector(".modifier");
+        const currentSequence = document.getElementById("current_sequence");
+        key.textContent = currentSequence.textContent; 
+    
+        currentKey.style.backgroundColor = "lightgreen";
+        resetSequence();
+    } else {
+        document.getElementById("update_error").style.display = "block";
+    }
 }
 
 
