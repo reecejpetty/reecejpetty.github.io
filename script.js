@@ -475,9 +475,10 @@ function convertFromHex(string) {
 }
 
 function sendHeightToParent() {
-    var height = document.body.scrollHeight; // Get the height of the content inside the iframe
+    var height = document.body.scrollHeight + 50; // Get the height of the content inside the iframe
     console.log('Sending height to parent:', height); // Debug message
     window.parent.postMessage(height, 'https://krscorporation.com/pages/online-configurator'); // Send the height to the parent
+    console.log(height);
   }
   
   // Send the height on page load and also after resizing (optional)
