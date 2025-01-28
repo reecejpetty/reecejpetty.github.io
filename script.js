@@ -224,9 +224,9 @@ function addPauseToSequence() {
     if (61 > pauseTimeNumber && pauseTimeNumber > 0) {
         const keyPress = new KeyPress(pauseTimeString, "FE", `0x${pauseTimeFormatted}`);
         buildSequence.push(keyPress);
+        let currentSequence = document.getElementById("current_sequence");
+        currentSequence.textContent += pauseTimeString;
     }
-    let currentSequence = document.getElementById("current_sequence");
-    currentSequence.textContent += pauseTimeString;
 }
 
 function resetSequence() {
