@@ -478,7 +478,7 @@ function sendHeightToParent() {
     var height = document.body.scrollHeight;
     
     // Send the height to the parent window
-    window.parent.postMessage(height, 'https://krscorporation.com'); // Change to your parent's domain
+    window.parent.postMessage(height, 'https://krscorporation.com/pages/online-configurator'); // Change to your parent's domain
   }
   
   // Call the function to send height on page load and whenever the content changes
