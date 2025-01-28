@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    <title>KRS Online Configurator</title>
+</head>
+<body>
+    <div id="selectors">
+        <div id="template">
+            <label for="template_name"><strong>Template Name:</strong></label>
+            <input name="template_name" id="template_name" type="text" value="default">
+        </div>
+        <div id="connection">
+            <label for="connection_dropdown"><strong>Connection:</strong></label>
+            <select name="connection" id="connection_dropdown">
+                <option value="Auto">Auto</option>
+                <option value="USB">USB</option>
+                <option value="PS/2">PS/2</option>
+                <option value="Serial">Serial</option>
+            </select>
+        </div>
+        <div id="mode">
+            <label for="mode_dropdown"><strong>Mode:</strong></label>
+            <select name="mode" id="mode_dropdown">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4" selected="selected">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+            </select>
+        </div>
+        <div id="speaker" style="display: flex; flex-direction: row; align-items: start;">
+            <p style="margin: 0;"><strong>Speaker:</strong></p>
+            <div>
+                <input type="radio" id="enable" name="speaker" value="On" checked></input>
+                <label for="enable">Enable</label><br>
+                <input type="radio" id="disable" name="speaker" value="Off"></input>
+                <label for="disable">Disable</label>
+            </div>
+        </div>
+        <div id="lock_sound" style="display: flex; flex-direction: row; align-items: start;">
+            <div>
+                <p style="margin: 0;"><strong>Beeper Sounds On:</strong></p>
+            </div>
+            <div style="display:flex; flex-direction:column;">
+                <div>
+                    <input type="radio" id="never" name="lock_sound" value="Never"></input>
+                    <label for="never">Never</label>
+                </div>
+                <div>
+                    <input type="radio" id="caps" name="lock_sound" value="Caps"></input>
+                    <label for="caps">Caps Lock</label>
+                </div>
+                <div>
+                    <input type="radio" id="bel" name="lock_sound" value="BEL"></input>
+                    <label for="bel">BEL</label>
+                </div>
+            </div>
+            <div style="display:flex; flex-direction:column;">
+                <div>
+                    <input type="radio" id="num" name="lock_sound" value="Num"></input>
+                    <label for="num">Num Lock</label>
+                </div>
+                <div>
+                    <input type="radio" id="scroll" name="lock_sound" value="Scroll" checked></input>
+                    <label for="scroll">Scroll Lock</label>
+                </div>
+                <div>
+                    <input type="radio" id="other" name="lock_sound" value="other"></input>
+                    <label for="other">Other: </label>
+                    <input type="text" id="other_text" value="0x07" style="width: 50px;">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="keys">
+        <table id="key_table">
+            <tr id="row_1">
+                <td id="0" onclick="configureButton(event)">
+                    <div class="cell-content">
+                        <div class="key">1</div>
+                        <div class="modifier">0x00</div>
+                    </div>
+                </td>
+                <td id="1" onclick="configureButton(event)">
+                    <div class="cell-content">
+                        <div class="key">2</div>
+                        <div class="modifier">0x00</div>
+                    </div>
+                </td>
+                <td id="2" onclick="configureButton(event)">
+                    <div class="cell-content">
+                        <div class="key">3</div>
+                        <div class="modifier">0x00</div>
+                    </div>
+                </td>
+                <td id="3" onclick="configureButton(event)">
+                    <div class="cell-content">
+                        <div class="key">4</div>
+                        <div class="modifier">0x00</div>
+                    </div>
+                </td>
+                <td id="4" onclick="configureButton(event)">
+                    <div class="cell-content">
+                        <div class="key">5</div>
+                        <div class="modifier">0x00</div>
+                    </div>
+                </td>
+                <td id="5" onclick="configureButton(event)">
+                    <div class="cell-content">
+                        <div class="key">6</div>
+                        <div class="modifier">0x00</div>
+                    </div>
+                </td>
+                <td id="6" onclick="configureButton(event)">
+                    <div class="cell-content">
+                        <div class="key">7</div>
+                        <div class="modifier">0x00</div>
+                    </div>
+                </td>
+                <td id="7" onclick="configureButton(event)">
+                    <div class="cell-content">
+                        <div class="key">8</div>
+                        <div class="modifier">0x00</div>
+                    </div>
+                </td>
+                <td id="8" onclick="configureButton(event)">
+                    <div class="cell-content">
+                        <div class="key">9</div>
+                        <div class="modifier">0x00</div>
+                    </div>
+                </td>
+                <td id="9" onclick="configureButton(event)">
+                    <div class="cell-content">
+                        <div class="key">0</div>
+                        <div class="modifier">0x00</div>
+                    </div>
+                </td>
+            </tr>
+            <tr id="row_2">
+                <td id="10" onclick="configureButton(event)">
+                    <div class="cell-content">
+                        <div class="key">a</div>
+                        <div class="modifier">0x00</div>
+                    </div>
+                </td>
+                <td id="11" onclick="configureButton(event)">
+                    <div class="cell-content">
+                        <div class="key">b</div>
+                        <div class="modifier">0x00</div>
+                    </div>
+                </td>
+                <td id="12" onclick="configureButton(event)">
+                    <div class="cell-content">
+                        <div class="key">c</div>
+                        <div class="modifier">0x00</div>
+                    </div>
+                </td>
+                <td id="13" onclick="configureButton(event)">
+                    <div class="cell-content">
+                        <div class="key">d</div>
+                        <div class="modifier">0x00</div>
+                    </div>
+                </td>
+                <td id="14" onclick="configureButton(event)">
+                    <div class="cell-content">
+                        <div class="key">e</div>
+                        <div class="modifier">0x00</div>
+                    </div>
+                </td>
+                <td id="15" onclick="configureButton(event)">
+                    <div class="cell-content">
+                        <div class="key">f</div>
+                        <div class="modifier">0x00</div>
+                    </div>
+                </td>
+                <td id="16" onclick="configureButton(event)">
+                    <div class="cell-content">
+                        <div class="key">g</div>
+                        <div class="modifier">0x00</div>
+                    </div>
+                </td>
+                <td id="17" onclick="configureButton(event)">
+                    <div class="cell-content">
+                        <div class="key">h</div>
+                        <div class="modifier">0x00</div>
+                    </div>
+                </td>
+                <td id="18" onclick="configureButton(event)">
+                    <div class="cell-content">
+                        <div class="key">i</div>
+                        <div class="modifier">0x00</div>
+                    </div>
+                </td>
+                <td id="19" onclick="configureButton(event)">
+                    <div class="cell-content">
+                        <div class="key">j</div>
+                        <div class="modifier">0x00</div>
+                    </div>
+                </td>
+            </tr>
+            <tr id="row_3">
+                <td id="20" onclick="configureButton(event)">
+                    <div class="cell-content">
+                        <div class="key">j</div>
+                        <div class="modifier">0x00</div>
+                    </div>
+                </td>
+                <td id="21" onclick="configureButton(event)">
+                    <div class="cell-content">
+                        <div class="key">l</div>
+                        <div class="modifier">0x00</div>
+                    </div>
+                </td>
+                <td id="22" onclick="configureButton(event)">
+                    <div class="cell-content">
+                        <div class="key">m</div>
+                        <div class="modifier">0x00</div>
+                    </div>
+                </td>
+                <td id="23" onclick="configureButton(event)">
+                    <div class="cell-content">
+                        <div class="key">n</div>
+                        <div class="modifier">0x00</div>
+                    </div>
+                </td>
+                <td id="24" onclick="configureButton(event)">
+                    <div class="cell-content">
+                        <div class="key">o</div>
+                        <div class="modifier">0x00</div>
+                    </div>
+                </td>
+                <td id="25" onclick="configureButton(event)">
+                    <div class="cell-content">
+                        <div class="key">p</div>
+                        <div class="modifier">0x00</div>
+                    </div>
+                </td>
+                <td id="26" onclick="configureButton(event)">
+                    <div class="cell-content">
+                        <div class="key">q</div>
+                        <div class="modifier">0x00</div>
+                    </div>
+                </td>
+                <td id="27" onclick="configureButton(event)">
+                    <div class="cell-content">
+                        <div class="key">r</div>
+                        <div class="modifier">0x00</div>
+                    </div>
+                </td>
+                <td id="28" onclick="configureButton(event)">
+                    <div class="cell-content">
+                        <div class="key">s</div>
+                        <div class="modifier">0x00</div>
+                    </div>
+                </td>
+                <td id="29" onclick="configureButton(event)">
+                    <div class="cell-content">
+                        <div class="key">t</div>
+                        <div class="modifier">0x00</div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="editor">
+        <div id="sequence">
+            <p class="header"><strong>Current Key Sequence:</strong></p>
+            <div id="current_sequence"></div>
+        </div>
+        <div id="sequence_input">
+            <input type="text" id="key_sequence" placeholder="Type Key Sequence Here"></input>
+            <div id="modifier_checks">
+                <p class="header"><strong>Modifiers:</strong></p>
+                <input type="checkbox" id="ctrl" name="modifiers" value="1">
+                <label for="ctrl">CTRL</label>
+                <input type="checkbox" id="shift" name="modifiers" value="2">
+                <label for="shift">SHIFT</label>
+                <input type="checkbox" id="alt" name="modifiers" value="4">
+                <label for="alt">ALT</label>
+                <input type="checkbox" id="win" name="modifiers" value="8">
+                <label for="win">WIN</label>
+            </div>
+            <div id="pause">
+                <button onclick="addPauseToSequence()" id="pause_button">Add Pause:</button>
+                <input type="number" id="pause_input" min="1" max="60"></input>
+                <p>Seconds(1-60)</p>
+            </div>
+        </div>
+        <div id="sequence_buttons">
+            <div style="display: flex; justify-content: space-between;">
+                <button onclick="addStringToSequence()" id="add_button">Add to Current Key Sequence</button>
+                <button onclick="updateKey()" id="update_button">Update Key with New Sequence</button>
+                <button onclick="resetSequence()" id="reset_button">Reset Current Key Sequence</button>
+            </div>
+        </div>
+        <div id="other_buttons">
+            <div id="left_keyboard">
+                <button onclick="addButtonToSequence(event)" value="[ESC]">ESC</button>
+                <button onclick="addButtonToSequence(event)" value="[F1]">F1</button>
+                <button onclick="addButtonToSequence(event)" value="[F2]">F2</button>
+                <button onclick="addButtonToSequence(event)" value="[F3]">F3</button>
+                <button onclick="addButtonToSequence(event)" value="[F4]">F4</button>
+                <button onclick="addButtonToSequence(event)" value="[F5]">F5</button>
+                <button onclick="addButtonToSequence(event)" value="[F6]">F6</button>
+                <button onclick="addButtonToSequence(event)" value="[F7]">F7</button>
+                <button onclick="addButtonToSequence(event)" value="[F8]">F8</button>
+                <button onclick="addButtonToSequence(event)" value="[F9]">F9</button>
+                <button onclick="addButtonToSequence(event)" value="[F10]">F10</button>
+                <button onclick="addButtonToSequence(event)" value="[F11]">F11</button>
+                <button onclick="addButtonToSequence(event)" value="[F12]">F12</button>
+                <button onclick="addButtonToSequence(event)" value="[TAB]" style="grid-column: span 2;">Tab</button>
+                <button style="grid-column: span 9; visibility: hidden;"></button>
+                <button onclick="addButtonToSequence(event)" value="[BACKSPACE]" style="grid-column: span 2;">Backspace</button>
+                <button onclick="addButtonToSequence(event)" value="[CAPS_LOCK]"  style="grid-column: span 2;">Caps Lock</button>
+                <button style="grid-column: span 9; visibility: hidden;"></button>
+                <button onclick="addButtonToSequence(event)" value="[ENTER]"  style="grid-column: span 2;">Enter</button>
+                <button onclick="addButtonToSequence(event)" value="[L_SHIFT]"  style="grid-column: span 3;">Left Shift</button>
+                <button style="grid-column: span 7; visibility: hidden;"></button>
+                <button onclick="addButtonToSequence(event)" value="[R_SHIFT]"  style="grid-column: span 3;">Right Shift</button>
+                <button onclick="addButtonToSequence(event)" value="[L_CTRL]"  style="grid-column: span 2;">Left Ctrl</button>
+                <button onclick="addButtonToSequence(event)" value="[L_WIN]">Left Win</button>
+                <button onclick="addButtonToSequence(event)" value="[L_ALT]">Left Alt</button>
+                <button style="grid-column: span 4; visibility: hidden;"></button>
+                <button onclick="addButtonToSequence(event)" value="[R_ALT]">Right Alt</button>
+                <button onclick="addButtonToSequence(event)" value="[R_WIN]">Right Win</button>
+                <button onclick="addButtonToSequence(event)" value="[MENU]">Menu</button>
+                <button onclick="addButtonToSequence(event)" value="[R_CTRL]"  style="grid-column: span 2;">Right Ctrl</button>
+            </div>
+            <div id="middle_keyboard">
+                <button onclick="addButtonToSequence(event)" value="[PRINT_SCREEN]">PrtSc</button>
+                <button onclick="addButtonToSequence(event)" value="[SCROLL_LOCK]">Scroll Lock</button>
+                <button onclick="addButtonToSequence(event)" value="[PAUSE]">Pause</button>
+                <button onclick="addButtonToSequence(event)" value="[INSERT]">Ins</button>
+                <button onclick="addButtonToSequence(event)" value="[HOME]">Home</button>
+                <button onclick="addButtonToSequence(event)" value="[PAGE_UP]">Page Up</button>
+                <button onclick="addButtonToSequence(event)" value="[DELETE]">Del</button>
+                <button onclick="addButtonToSequence(event)" value="[END]">End</button>
+                <button onclick="addButtonToSequence(event)" value="[PAGE_DOWN]">Page Down</button>
+                <button style="visibility: hidden;"></button>
+                <button onclick="addButtonToSequence(event)" value="[UP_ARROW]">Up Arrow</button>
+                <button style="visibility: hidden;"></button>
+                <button onclick="addButtonToSequence(event)" value="[LEFT_ARROW]">Left Arrow</button>
+                <button onclick="addButtonToSequence(event)" value="[DOWN_ARROW]">Down Arrow</button>
+                <button onclick="addButtonToSequence(event)" value="[RIGHT_ARROW]">Right Arrow</button>
+            </div>
+            <div id="numpad">
+                <button onclick="addButtonToSequence(event)" value="[NUM_LOCK]">Num Lock</button>
+                <button onclick="addButtonToSequence(event)" value="[NUM_/]">Num /</button>
+                <button onclick="addButtonToSequence(event)" value="[NUM_*]">Num *</button>
+                <button onclick="addButtonToSequence(event)" value="[NUM_-]">Num -</button>
+                <button onclick="addButtonToSequence(event)" value="[NUM_7]">Num 7</button>
+                <button onclick="addButtonToSequence(event)" value="[NUM_8]">Num 8</button>
+                <button onclick="addButtonToSequence(event)" value="[NUM_9]">Num 9</button>
+                <button onclick="addButtonToSequence(event)" value="[NUM_+]" style="grid-row: span 2;">Num +</button>
+                <button onclick="addButtonToSequence(event)" value="[NUM_4]">Num 4</button>
+                <button onclick="addButtonToSequence(event)" value="[NUM_5]">Num 5</button>
+                <button onclick="addButtonToSequence(event)" value="[NUM_6]">Num 6</button>
+                <button onclick="addButtonToSequence(event)" value="[NUM_1]">Num 1</button>
+                <button onclick="addButtonToSequence(event)" value="[NUM_2]">Num 2</button>
+                <button onclick="addButtonToSequence(event)" value="[NUM_3]">Num 3</button>
+                <button onclick="addButtonToSequence(event)" value="[NUM_ENTER]" style="grid-row: span 2;">Num Enter</button>
+                <button onclick="addButtonToSequence(event)" value="[NUM_0]" style="grid-column: span 2;">Num 0</button>
+                <button onclick="addButtonToSequence(event)" value="[NUM_.]">Num .</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="generate">
+        <button onclick="createKRS()" id="generate_button">Generate .KRS File</button>
+    </div>
+    <div id="copy" style="display: none;">
+        <button onclick="copyKRS()" id="copy_button">Copy to Clipboard</button>
+    </div>
+    <div id="download">
+        <button onclick="downloadKRS()" id="download_button">Download .KRS File</button>
+        <div  id="download_error" style="color: red; font-weight: bold; text-align: center; display: none;"><p style="margin-top: 10px;">! Please press "Generate .KRS File" before downloading !</p></div>
+    </div>
+    <pre id="file"></pre>
+</body>
+<script src="script.js"></script>
+</html>

@@ -1,0 +1,225 @@
+body {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: monospace;
+}
+
+#pause_button, #template_name, #other_text, #pause_input, #reset_button, #add_button, #update_button, #mode_dropdown, #connection_dropdown, #other_buttons button, #generate_button, #copy_button, #download_button {
+    border: solid 1px black;
+    font-family: monospace;
+}
+
+#selectors, #editor, #key_table {
+    display: flex;
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#selectors {
+    flex-direction: row;
+    margin-left: auto;
+    margin-right: auto;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    background-color: lightgray;
+}
+
+#connection, #template, #mode, #speaker, #lock_sound {
+    padding: 10px;
+    border: solid 1px black;
+    flex-grow: 1;
+    box-sizing: border-box;
+}
+
+#keys {
+    margin-top: 10px;
+}
+
+#key_table {
+    border-collapse: collapse;
+    height: 360px;
+    margin-bottom: 10px;
+    table-layout: fixed;
+}
+
+#keys td {
+    width: 120px;
+    height: 120px;
+    border-style: solid;
+    border-width: 1px;
+    box-sizing: border-box;
+    background-color: lightgray;
+    text-align: center;
+    vertical-align: middle;
+    overflow: hidden;
+}
+
+.key {
+    width: 110px;
+}
+
+.cell-content {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto; /* Enable scrolling for overflowing text */
+    word-wrap: break-word; /* Wrap long text */
+    white-space: normal; /* Allow text wrapping */
+    text-align: center; /* Center text horizontally */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; /* Center text vertically */
+}
+
+#editor {
+    flex-direction: column;
+}
+
+#sequence {
+    display: flex;
+    align-items: center;
+}
+
+#current_sequence {
+    flex-grow: 1;
+    width: 750px;
+    height: 30px;
+    line-height: 24px;
+    box-sizing: border-box;
+    margin-left: 10px;
+    padding: 2px 5px;
+    background-color: lightgray;
+    border: solid 1px black;
+}
+
+#sequence_input{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#key_sequence {
+    width: 550px;
+    height: 30px;
+    margin: 10px 0px 10px 0px;
+    border: solid 1px black;
+    font-family: monospace;
+    box-sizing: border-box;
+}
+
+#modifier_checks, #pause {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#modifier_checks label {
+    margin-right: 5px;
+}
+
+#modifier_checks {
+    background-color: lightgray;
+    padding: 0px 10px 0px 10px;
+}
+
+#pause_input {
+    width: 45px;
+    margin: 0px 5px 0px 5px;
+}
+
+#pause_button, #pause_input, #modifier_checks {
+    height: 30px;
+    box-sizing: border-box;
+}
+
+#pause_button {
+    font-weight: bold;
+}
+
+#reset_button, #add_button, #update_button {
+    font-size: 16px;
+    width: 350px;
+    height: 35px;
+    font-weight: bold;
+}
+
+#reset_button {
+    background-color: #ff7777;
+}
+
+#update_button {
+    background-color: lightgreen;
+}
+
+.chars {
+    visibility: hidden;
+}
+
+.modifier {
+    display: none;
+}
+
+#other_buttons {
+    background-color: lightgray;
+    border: solid 1px black;
+    display: flex;
+    margin: 10px 0px 10px 0px;
+    flex-direction: row;
+}
+
+#other_buttons button {
+    font-size: 12px;
+    text-align: center;
+    background-color: white;
+}
+
+#left_keyboard, #middle_keyboard, #numpad {
+    display: grid;
+    margin: 5px 5px 5px 5px;
+    grid-auto-rows: 60px;
+    gap: 5px;
+}
+
+#left_keyboard {
+    grid-template-columns: repeat(13, 1fr);
+}
+
+#middle_keyboard {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+#numpad {
+    grid-template-columns: repeat(4, 1fr); /* 4 columns of equal width */
+}
+
+#generate_button, #copy_button, #download_button {
+    width: 1200px;
+    height: 50px;
+    margin-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: large;
+    font-weight: bold;
+}
+
+#download_button {
+    margin-bottom: 0px;
+}
+
+#file {
+    width: auto;
+    visibility: hidden;
+    background-color: lightgray;
+    border: solid 1px black;
+    box-sizing: border-box;
+    padding: 20px;
+    white-space: pre-wrap;
+}
+
+#file p {
+    margin: 0px;
+    font-family: monospace;
+}
