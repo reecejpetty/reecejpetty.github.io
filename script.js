@@ -472,3 +472,15 @@ function convertFromHex(string) {
             break;
     }
 }
+
+function sendHeightToParent() {
+    // Get the height of the document (or body)
+    var height = document.body.scrollHeight;
+    
+    // Send the height to the parent window
+    window.parent.postMessage(height, 'https://krscorporation.com'); // Change to your parent's domain
+  }
+  
+  // Call the function to send height on page load and whenever the content changes
+  window.onload = sendHeightToParent;
+  window.onresize = sendHeightToParent; // Optionally, handle resizing as well
