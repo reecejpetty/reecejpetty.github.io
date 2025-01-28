@@ -56,6 +56,10 @@ body {
     overflow: hidden;
 }
 
+#keys td:hover {
+    background-color: darkgray;
+}
+
 .key {
     width: 110px;
 }
@@ -146,6 +150,18 @@ body {
     font-weight: bold;
 }
 
+#add_button:hover, #pause_button:hover, #generate_button:hover, #download_button:hover {
+    background-color: darkgray;
+}
+
+#update_button:hover {
+    background-color: #66dd66;
+}
+
+#reset_button:hover {
+    background-color: #dd6666;
+}
+
 #reset_button {
     background-color: #ff7777;
 }
@@ -174,6 +190,10 @@ body {
     font-size: 12px;
     text-align: center;
     background-color: white;
+}
+
+#other_buttons button:hover {
+    background-color: lightgray;
 }
 
 #left_keyboard, #middle_keyboard, #numpad {
