@@ -119,6 +119,85 @@ class KeyPress {
     }
 }
 
+const modes = [
+    {
+        "mode": "1",
+        "connection": "Auto",
+        "sound": "On",
+        "lock": "Scroll",
+        "keys": [
+            new Key([new KeyPress("1", "1E", "00")]),
+            new Key([new KeyPress("2", "1F", "00")]),
+            new Key([new KeyPress("3", "20", "00")]),
+            new Key([new KeyPress("4", "21", "00")]),
+            new Key([new KeyPress("5", "22", "00")]),
+            new Key([new KeyPress("6", "23", "00")]),
+            new Key([new KeyPress("7", "24", "00")]),
+            new Key([new KeyPress("8", "25", "00")]),
+            new Key([new KeyPress("9", "26", "00")]),
+            new Key([new KeyPress("0", "27", "00")]),
+            new Key([new KeyPress("a", "04", "00")]),
+            new Key([new KeyPress("b", "05", "00")]),
+            new Key([new KeyPress("c", "06", "00")]),
+            new Key([new KeyPress("d", "07", "00")]),
+            new Key([new KeyPress("e", "08", "00")]),
+            new Key([new KeyPress("f", "09", "00")]),
+            new Key([new KeyPress("g", "0A", "00")]),
+            new Key([new KeyPress("h", "0B", "00")]),
+            new Key([new KeyPress("i", "0C", "00")]),
+            new Key([new KeyPress("j", "0D", "00")]),
+            new Key([new KeyPress("k", "0E", "00")]),
+            new Key([new KeyPress("l", "0F", "00")]),
+            new Key([new KeyPress("m", "10", "00")]),
+            new Key([new KeyPress("n", "11", "00")]),
+            new Key([new KeyPress("o", "12", "00")]),
+            new Key([new KeyPress("p", "13", "00")]),
+            new Key([new KeyPress("q", "14", "00")]),
+            new Key([new KeyPress("r", "15", "00")]),
+            new Key([new KeyPress("s", "16", "00")]),
+            new Key([new KeyPress("t", "17", "00")])
+        ]
+    },
+    {
+        "mode": "2",
+        "connection": "USB",
+        "sound": "On",
+        "lock": "Num",
+        "keys": [
+            new Key([new KeyPress("h", "0B", "00")]),
+            new Key([new KeyPress("i", "0C", "00")]),
+            new Key([new KeyPress("e", "08", "00")]),
+            new Key([new KeyPress("d", "07", "00")]),
+            new Key([new KeyPress("j", "0D", "00")]),
+            new Key([new KeyPress("g", "0A", "00")]),
+            new Key([new KeyPress("a", "04", "00")]),
+            new Key([new KeyPress("[UP_ARROW]", "52", "00")]),
+            new Key([new KeyPress("[LEFT_ARROW]", "50", "00")]),
+            new Key([new KeyPress("[NUM_5]", "5D", "00")]),
+            new Key([new KeyPress(".", "37", "00")]),
+            new Key([new KeyPress("f", "09", "00")]),
+            new Key([new KeyPress("[ESC]", "29", "00")]),
+            new Key([new KeyPress("[DEL]", "4C", "00")]),
+            new Key([new KeyPress("[BACKSPACE]", "2A", "00")]),
+            new Key([new KeyPress("[END]", "4D", "00")]),
+            new Key([new KeyPress("[TAB]", "2B", "00")]),
+            new Key([new KeyPress("[DOWN_ARROW]", "51", "00")]),
+            new Key([new KeyPress("[RIGHT_ARROW]", "4F", "00")]),
+            new Key([new KeyPress("[NUM_5]", "5D", "00")]),
+            new Key([new KeyPress("0", "27", "00")]),
+            new Key([new KeyPress("1", "1E", "00")]),
+            new Key([new KeyPress("2", "1F", "00")]),
+            new Key([new KeyPress("3", "20", "00")]),
+            new Key([new KeyPress("4", "21", "00")]),
+            new Key([new KeyPress("5", "22", "00")]),
+            new Key([new KeyPress("6", "23", "00")]),
+            new Key([new KeyPress("7", "24", "00")]),
+            new Key([new KeyPress("8", "25", "00")]),
+            new Key([new KeyPress("9", "26", "00")])
+        ]
+    }
+]
+
 let currentKey;
 let buildSequence = [];
 let keys = [];
@@ -145,33 +224,64 @@ document.addEventListener('DOMContentLoaded', function () {
         const key = new Key(keyPresses);
         keys.push(key);
     }
+    console.log(keys);
+    const modeDropdown = document.getElementById("mode_dropdown");
+    modeDropdown.addEventListener("change", updateMode);
 })
 
-function configureButton(event) {
-    resetSequence();
-    const currentSequence = document.getElementById("current_sequence");
-    if (currentKey == null){
-        // If first key clicked, currentKey is just the clicked key
-        currentKey = event.currentTarget;
-        currentKey.style.backgroundColor = "yellow";
-    } else if (currentKey == event.currentTarget) {
-        // If the same key is clicked twice, makes it inactive and unchecks Modifiers checkboxes
+function updateMode() {
+    let modeValue = document.getElementById("mode_dropdown").value;
+    if (modeValue != "4"){
         currentKey.style.backgroundColor = "lightgray";
         currentKey = null;
-    } else {
-        // Sets past key to inactive and sets clicked key to currentKey
-        currentKey.style.backgroundColor = "lightgray";
-        currentKey = event.currentTarget;
-        currentKey.style.backgroundColor = "yellow";
     }
+    
+    for (const mode of modes) {
+        if (modeValue == mode["mode"]) {
+            document.getElementById("template_name").value = `Mode ${modeValue}`;
+            document.getElementById("connection_dropdown").value = mode["connection"];
+            document.getElementById(`${mode["sound"]}`).checked = true;
+            document.getElementById(`${mode["lock"]}`).checked = true;
+            for (let i = 0; i < 30; i++) {
+                const cell = document.getElementById(`${i}`);
+                const cellContent = cell.querySelector(".cell-content");
+                const keyContent = cellContent.querySelector(".key");
+                keyContent.textContent = mode["keys"][i].keyPresses[0].string;
+                keys[i] = mode["keys"][i];
+            }
+            console.log(keys);
+        }
+    }
+}
 
-    if (currentKey != null) {
-        const index = parseInt(currentKey.id);
-        const key = keys[index];
-        let sequenceString = "";
-        // Populate Current Key Sequence with current key's strings
-        for (let i = 0; i < key.keyPresses.length; i++) {
-            sequenceString += key.keyPresses[i].string;
+function configureButton(event) {
+    const mode = document.getElementById("mode_dropdown").value;
+    if (mode == "4") {
+        resetSequence();
+        const currentSequence = document.getElementById("current_sequence");
+        if (currentKey == null){
+            // If first key clicked, currentKey is just the clicked key
+            currentKey = event.currentTarget;
+            currentKey.style.backgroundColor = "yellow";
+        } else if (currentKey == event.currentTarget) {
+            // If the same key is clicked twice, makes it inactive and unchecks Modifiers checkboxes
+            currentKey.style.backgroundColor = "lightgray";
+            currentKey = null;
+        } else {
+            // Sets past key to inactive and sets clicked key to currentKey
+            currentKey.style.backgroundColor = "lightgray";
+            currentKey = event.currentTarget;
+            currentKey.style.backgroundColor = "yellow";
+        }
+    
+        if (currentKey != null) {
+            const index = parseInt(currentKey.id);
+            const key = keys[index];
+            let sequenceString = "";
+            // Populate Current Key Sequence with current key's strings
+            for (let i = 0; i < key.keyPresses.length; i++) {
+                sequenceString += key.keyPresses[i].string;
+            }
         }
     }
 }
