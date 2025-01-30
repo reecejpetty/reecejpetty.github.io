@@ -60,6 +60,22 @@ body {
     background-color: darkgray;
 }
 
+#keys td.configured {
+    background-color: lightgreen;
+}
+
+#keys td.configured:hover {
+    background-color: #66dd66;
+}
+
+#keys td.active {
+    background-color: yellow;
+}
+
+#keys td.active:hover {
+    background-color: #dddd00;
+}
+
 .key {
     width: 110px;
 }

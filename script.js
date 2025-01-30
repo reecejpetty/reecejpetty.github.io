@@ -232,10 +232,18 @@ document.addEventListener('DOMContentLoaded', function () {
 function updateMode() {
     let modeValue = document.getElementById("mode_dropdown").value;
     if (modeValue != "4"){
-        currentKey.style.backgroundColor = "lightgray";
+        for (let i = 0; i < 30; i++) {
+            const cell = document.getElementById(`${i}`);
+            if (cell.classList.contains("active")) {
+                cell.classList.remove("active");
+            }
+            if (cell.classList.contains("configured")) {
+                cell.classList.remove("configured");
+            }
+        }
         currentKey = null;
     }
-    
+
     for (const mode of modes) {
         if (modeValue == mode["mode"]) {
             document.getElementById("template_name").value = `Mode ${modeValue}`;
@@ -262,16 +270,20 @@ function configureButton(event) {
         if (currentKey == null){
             // If first key clicked, currentKey is just the clicked key
             currentKey = event.currentTarget;
-            currentKey.style.backgroundColor = "yellow";
+            //currentKey.style.backgroundColor = "yellow";
+            currentKey.classList.add("active");
         } else if (currentKey == event.currentTarget) {
             // If the same key is clicked twice, makes it inactive and unchecks Modifiers checkboxes
-            currentKey.style.backgroundColor = "lightgray";
+            //currentKey.style.backgroundColor = "lightgray";
+            currentKey.classList.remove("active");
             currentKey = null;
         } else {
             // Sets past key to inactive and sets clicked key to currentKey
-            currentKey.style.backgroundColor = "lightgray";
+            //currentKey.style.backgroundColor = "lightgray";
+            currentKey.classList.remove("active");
             currentKey = event.currentTarget;
-            currentKey.style.backgroundColor = "yellow";
+            //currentKey.style.backgroundColor = "yellow";
+            currentKey.classList.add("active");
         }
     
         if (currentKey != null) {
@@ -381,7 +393,10 @@ function updateKey() {
         const currentSequence = document.getElementById("current_sequence");
         key.textContent = currentSequence.textContent; 
     
-        currentKey.style.backgroundColor = "lightgreen";
+        //currentKey.style.backgroundColor = "lightgreen";
+        currentKey.classList.remove("active");
+        currentKey.classList.add("configured");
+        currentKey = null;
         resetSequence();
     } else {
         document.getElementById("update_error").style.display = "block";
