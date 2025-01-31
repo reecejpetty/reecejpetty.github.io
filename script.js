@@ -716,7 +716,7 @@ function convertToHex() {
     return `0x0${hexadecimal}`;
 }
 
-// NOTE CURRENTLY USED - Determine modifier boxes to check from hex value
+// NOT CURRENTLY USED - Determine modifier boxes to check from hex value
 function convertFromHex(string) {
     const ctrlCheckbox = document.getElementById("ctrl");
     const shiftCheckbox = document.getElementById("shift");

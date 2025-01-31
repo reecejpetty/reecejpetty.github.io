@@ -6,7 +6,7 @@ body {
 }
 
 #pause_button, #template_name, #other_text, #pause_input, #reset_button, #add_button, #update_button, #mode_dropdown, #connection_dropdown, #modifier_checks, #other_buttons button, #generate_button, #copy_button, #download_button {
-    border: solid 1px black;
+    border: solid 1.5px black;
     font-family: monospace;
 }
 
@@ -15,7 +15,7 @@ input[type="file"] {
 }
 
 .fileinput {
-    border: 1px solid black;
+    border: 1.5px solid black;
     display: inline-block;
     background-color: #f6f6f6;
     padding: 6px 4px 6px 8px;
@@ -53,6 +53,8 @@ input[type="file"] {
     flex-wrap: nowrap;
     align-items: stretch;
     background-color: lightgray;
+    border: 1px solid black;
+    box-sizing: border-box;
 }
 
 #connection, #template, #mode, #speaker, #lock_sound {
@@ -68,7 +70,7 @@ input[type="file"] {
 
 #key_table {
     border-collapse: collapse;
-    height: 360px;
+    height: 364px;
     margin-bottom: 10px;
     table-layout: fixed;
 }
@@ -77,7 +79,7 @@ input[type="file"] {
     width: 120px;
     height: 120px;
     border-style: solid;
-    border-width: 1px;
+    border-width: 2px;
     box-sizing: border-box;
     background-color: lightgray;
     text-align: center;
@@ -140,7 +142,7 @@ input[type="file"] {
     margin-left: 10px;
     padding: 2px 5px;
     background-color: lightgray;
-    border: solid 1px black;
+    border: solid 1.5px black;
 }
 
 #sequence_input{
@@ -154,7 +156,7 @@ input[type="file"] {
     width: 550px;
     height: 30px;
     margin: 10px 0px 10px 0px;
-    border: solid 1px black;
+    border: solid 1.5px black;
     font-family: monospace;
     box-sizing: border-box;
 }
@@ -225,15 +227,15 @@ input[type="file"] {
 }
 
 #other_buttons {
-    background-color: gray;
-    border: solid 1px black;
+    background-color: lightgray;
+    border: solid 2px black;
     display: flex;
     margin: 10px 0px 10px 0px;
     flex-direction: row;
 }
 
 #other_buttons button {
-    font-size: 12px;
+    font-size: 14px;
     text-align: center;
     background-color: white;
 }
