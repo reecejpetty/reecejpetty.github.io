@@ -11,8 +11,9 @@
         <div id="template">
             <label for="template_name"><strong>Template Name:</strong></label>
             <input name="template_name" id="template_name" type="text" value="default"><br>
-            <label for="fileinput"><strong>Upload KRS File:</strong></label><br>
-            <input type="file" id="fileinput" name="fileinput" accept=".krs">
+            <label class="fileinput" for="fileinput"><strong>Upload KRS File:</strong>
+            <input type="file" id="fileinput" name="fileinput" accept=".krs"></label>
+            <span id="upload_name"></span>
         </div>
         <div id="connection">
             <label for="connection_dropdown"><strong>Connection:</strong></label>

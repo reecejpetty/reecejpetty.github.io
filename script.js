@@ -264,6 +264,7 @@ function updateMode() {
 
 document.getElementById("fileinput").addEventListener("change", (event) => {
     const file = event.target.files[0];
+    const uploadName = file.name;
     const reader = new FileReader();
     reader.onload = (e) => {
         const fileData = e.target.result;
@@ -310,6 +311,7 @@ document.getElementById("fileinput").addEventListener("change", (event) => {
         }
     }
     reader.readAsText(file);
+    document.getElementById("upload_name").textContent = uploadName;
 })
 
 function configureButton(event) {
