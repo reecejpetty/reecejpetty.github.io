@@ -34,6 +34,11 @@ input[type="file"] {
     width: 150px;
 }
 
+#upload_name.error {
+    font-weight: bold;
+    color: red;
+}
+
 #selectors, #editor, #key_table {
     display: flex;
     width: 1200px;

@@ -417,6 +417,7 @@ function updateMode() {
 document.getElementById("fileinput").addEventListener("change", (event) => {
     const file = event.target.files[0];
     const uploadName = file.name;
+    const uploadNameText = document.getElementById("upload_name");
     const reader = new FileReader();
     reader.onload = (e) => {
         try {
@@ -462,11 +463,15 @@ document.getElementById("fileinput").addEventListener("change", (event) => {
                 keys[index] = newKey
             }
         } catch (error) {
-            document.getElementById("upload_name").textContent = "FILE ERROR";
+            uploadNameText.classList.add("error");
+            uploadNameText.textContent = "FILE ERROR";
         }
     }
     reader.readAsText(file);
-    document.getElementById("upload_name").textContent = uploadName;
+    if (uploadNameText.classList.contains("error")) {
+        uploadNameText.classList.remove("error");
+    }
+    uploadNameText.textContent = uploadName;
 })
 
 function configureButton(event) {
