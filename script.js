@@ -235,6 +235,44 @@ const modes = [
         ]
     },
     {
+        "mode": "4",
+        "connection": "Auto",
+        "sound": "On",
+        "lock": "Scroll",
+        "keys": [
+            new Key([new KeyPress("", "00", "00")]),
+            new Key([new KeyPress("", "00", "00")]),
+            new Key([new KeyPress("", "00", "00")]),
+            new Key([new KeyPress("", "00", "00")]),
+            new Key([new KeyPress("", "00", "00")]),
+            new Key([new KeyPress("", "00", "00")]),
+            new Key([new KeyPress("", "00", "00")]),
+            new Key([new KeyPress("", "00", "00")]),
+            new Key([new KeyPress("", "00", "00")]),
+            new Key([new KeyPress("", "00", "00")]),
+            new Key([new KeyPress("", "00", "00")]),
+            new Key([new KeyPress("", "00", "00")]),
+            new Key([new KeyPress("", "00", "00")]),
+            new Key([new KeyPress("", "00", "00")]),
+            new Key([new KeyPress("", "00", "00")]),
+            new Key([new KeyPress("", "00", "00")]),
+            new Key([new KeyPress("", "00", "00")]),
+            new Key([new KeyPress("", "00", "00")]),
+            new Key([new KeyPress("", "00", "00")]),
+            new Key([new KeyPress("", "00", "00")]),
+            new Key([new KeyPress("", "00", "00")]),
+            new Key([new KeyPress("", "00", "00")]),
+            new Key([new KeyPress("", "00", "00")]),
+            new Key([new KeyPress("", "00", "00")]),
+            new Key([new KeyPress("", "00", "00")]),
+            new Key([new KeyPress("", "00", "00")]),
+            new Key([new KeyPress("", "00", "00")]),
+            new Key([new KeyPress("", "00", "00")]),
+            new Key([new KeyPress("", "00", "00")]),
+            new Key([new KeyPress("", "00", "00")])
+        ]
+    },
+    {
         "mode": "5",
         "connection": "Serial",
         "sound": "On",
@@ -377,11 +415,13 @@ document.addEventListener('DOMContentLoaded', function () {
         keys.push(key);
     }
     console.log(keys);
-    const modeDropdown = document.getElementById("mode_dropdown");
-    modeDropdown.addEventListener("change", updateMode);
+    //const modeDropdown = document.getElementById("mode_dropdown");
+    //modeDropdown.addEventListener("change", updateMode);
 })
 
-function updateMode() {
+// Update modes when Mode Dropdown is changed
+//function updateMode() {
+document.getElementById("mode_dropdown").addEventListener("change", function () {
     let modeValue = document.getElementById("mode_dropdown").value;
     if (modeValue != "4"){
         for (let i = 0; i < 30; i++) {
@@ -412,7 +452,7 @@ function updateMode() {
             console.log(keys);
         }
     }
-}
+})
 
 document.getElementById("fileinput").addEventListener("change", (event) => {
     const file = event.target.files[0];
