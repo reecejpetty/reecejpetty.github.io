@@ -18,13 +18,20 @@ input[type="file"] {
     border: 1px solid black;
     display: inline-block;
     background-color: lightgray;
-    margin-top: 10px;
-    padding: 6px 12px;
+    padding: 6px 8px;
     cursor: pointer;
 }
 
 .fileinput:hover {
     background-color: darkgray;
+}
+
+#upload_name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0px;
+    width: 150px;
 }
 
 #selectors, #editor, #key_table {
@@ -187,20 +194,20 @@ input[type="file"] {
     background-color: darkgray;
 }
 
-#update_button:hover {
-    background-color: #66dd66;
+#update_button {
+    background-color: lightgreen;
 }
 
-#reset_button:hover {
-    background-color: #dd6666;
+#update_button:hover {
+    background-color: #66dd66;
 }
 
 #reset_button {
     background-color: #ff7777;
 }
 
-#update_button {
-    background-color: lightgreen;
+#reset_button:hover {
+    background-color: #dd6666;
 }
 
 .chars {
