@@ -392,36 +392,11 @@ let currentKey;
 let buildSequence = [];
 let keys = [];
 
-document.addEventListener('DOMContentLoaded', function () {
-    for (let i = 0; i < 30; i++) {
-        // Get HTML information
-        const cell = document.getElementById(`${i}`);
-        const cellContent = cell.querySelector(".cell-content");
-        const keyContent = cellContent.querySelector(".key");
-        const modifierContent = cellContent.querySelector(".modifier");
-        // Create new keyPress sequence object
-        const keyPresses = [];
-        const string = keyContent.textContent;
-        if (!(string.toUpperCase() in keyboardHexMap)) {
-            for (const char of string) {
-                const keyPress = new KeyPress(char, keyboardHexMap[char.toUpperCase()], modifierContent.textContent);
-                keyPresses.push(keyPress);
-            }
-        } else {
-            const keyPress = new KeyPress(string, keyboardHexMap[string.toUpperCase()], modifierContent.textContent);
-            keyPresses.push(keyPress);
-        }
-        const key = new Key(keyPresses);
-        keys.push(key);
-    }
-    console.log(keys);
-    //const modeDropdown = document.getElementById("mode_dropdown");
-    //modeDropdown.addEventListener("change", updateMode);
-})
+document.addEventListener('DOMContentLoaded', updateMode);
 
-// Update modes when Mode Dropdown is changed
-//function updateMode() {
-document.getElementById("mode_dropdown").addEventListener("change", function () {
+document.getElementById("mode_dropdown").addEventListener("change", updateMode);
+
+function updateMode() {
     let modeValue = document.getElementById("mode_dropdown").value;
     if (modeValue != "4"){
         for (let i = 0; i < 30; i++) {
@@ -449,11 +424,11 @@ document.getElementById("mode_dropdown").addEventListener("change", function () 
                 keyContent.textContent = mode["keys"][i].keyPresses[0].string;
                 keys[i] = mode["keys"][i];
             }
-            console.log(keys);
         }
     }
-})
+}
 
+// Allow user to upload KRS File
 document.getElementById("fileinput").addEventListener("change", (event) => {
     const file = event.target.files[0];
     const uploadName = file.name;
@@ -479,7 +454,6 @@ document.getElementById("fileinput").addEventListener("change", (event) => {
             document.getElementById(`${lock}`).checked = true;
     
             const fileKeys = krsFile.getElementsByTagName("key");
-            console.log(fileKeys)
             for (let key of fileKeys) {
                 const index = key.getAttribute("keynum") - 1;
     
@@ -514,6 +488,7 @@ document.getElementById("fileinput").addEventListener("change", (event) => {
     uploadNameText.textContent = uploadName;
 })
 
+// Set which button is configurable
 function configureButton(event) {
     const mode = document.getElementById("mode_dropdown").value;
     if (mode == "4") {
@@ -522,19 +497,15 @@ function configureButton(event) {
         if (currentKey == null){
             // If first key clicked, currentKey is just the clicked key
             currentKey = event.currentTarget;
-            //currentKey.style.backgroundColor = "yellow";
             currentKey.classList.add("active");
         } else if (currentKey == event.currentTarget) {
             // If the same key is clicked twice, makes it inactive and unchecks Modifiers checkboxes
-            //currentKey.style.backgroundColor = "lightgray";
             currentKey.classList.remove("active");
             currentKey = null;
         } else {
             // Sets past key to inactive and sets clicked key to currentKey
-            //currentKey.style.backgroundColor = "lightgray";
             currentKey.classList.remove("active");
             currentKey = event.currentTarget;
-            //currentKey.style.backgroundColor = "yellow";
             currentKey.classList.add("active");
         }
     
@@ -550,6 +521,7 @@ function configureButton(event) {
     }
 }
 
+// Add a string to current key sequence
 function addStringToSequence() {
     const ctrlCheckbox = document.getElementById("ctrl");
     const shiftCheckbox = document.getElementById("shift");
@@ -580,6 +552,7 @@ function addStringToSequence() {
     clearModifiers();
 }
 
+// Add "other" button to current key sequence
 function addButtonToSequence(event) {
     const button = event.currentTarget;
     let currentSequence = document.getElementById("current_sequence");
@@ -590,6 +563,7 @@ function addButtonToSequence(event) {
     console.log(keys);
 }
 
+// Add a pause time to current key sequence
 function addPauseToSequence() {
     const pauseTime = document.getElementById("pause_input").value;
     const pauseTimeNumber = parseInt(pauseTime);
@@ -603,6 +577,7 @@ function addPauseToSequence() {
     }
 }
 
+// Reset current key sequence to empty
 function resetSequence() {
     const currentSequence = document.getElementById("current_sequence");
     const keySequence = document.getElementById("key_sequence");
@@ -616,6 +591,7 @@ function resetSequence() {
     buildSequence = [];
 }
 
+// Set modifier checkboxes to empty
 function clearModifiers() {
     const ctrlCheckbox = document.getElementById("ctrl");
     const shiftCheckbox = document.getElementById("shift");
@@ -627,6 +603,7 @@ function clearModifiers() {
     winCheckbox.checked = false;
 }
 
+// Update current key to current key sequence
 function updateKey() {
     // Update currentKey with new key sequence
     const index = currentKey.id;
@@ -641,7 +618,6 @@ function updateKey() {
         // Update HTML with new key sequence
         const cellContent = currentKey.querySelector(".cell-content");
         const key = cellContent.querySelector(".key");
-        const modifier = cellContent.querySelector(".modifier");
         const currentSequence = document.getElementById("current_sequence");
         key.textContent = currentSequence.textContent; 
     
@@ -655,7 +631,7 @@ function updateKey() {
     }
 }
 
-
+// Generate KRS File
 function createKRS() {
     // Get values of bumpbar options
     const error = document.getElementById("download_error");
@@ -705,17 +681,7 @@ function createKRS() {
     sendHeightToParent();
 }
 
-// function copyKRS() {
-//     const file = document.getElementById("file");
-//     if (file.textContent != ''){
-//         navigator.clipboard.writeText(file.textContent).then(() => {
-//             alert("KRS File copied to clipboard. To save, paste into empty Notepad file, then save as \"template_name\".krs");
-//         }).catch(err => {
-//             console.error("Failed to copy text: ", err);
-//         })
-//     }
-// }
-
+// Download generated KRS File
 function downloadKRS() {
     const file = document.getElementById("file");
     console.log(file.textContent);
@@ -733,6 +699,7 @@ function downloadKRS() {
     }
 }
 
+// Convert currently checked modifier boxes to hex value
 function convertToHex() {
     const ctrlCheckbox = document.getElementById("ctrl");
     const shiftCheckbox = document.getElementById("shift");
@@ -749,6 +716,7 @@ function convertToHex() {
     return `0x0${hexadecimal}`;
 }
 
+// NOTE CURRENTLY USED - Determine modifier boxes to check from hex value
 function convertFromHex(string) {
     const ctrlCheckbox = document.getElementById("ctrl");
     const shiftCheckbox = document.getElementById("shift");
@@ -859,6 +827,7 @@ function convertFromHex(string) {
     }
 }
 
+// For use with iframe, send page height to parent page.
 function sendHeightToParent() {
     var height = document.body.scrollHeight + 50; // Get the height of the content inside the iframe
     console.log('Sending height to parent:', height); // Debug message
