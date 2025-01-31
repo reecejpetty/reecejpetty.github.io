@@ -262,6 +262,56 @@ function updateMode() {
     }
 }
 
+document.getElementById("fileinput").addEventListener("change", (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        const fileData = e.target.result;
+        const parser = new DOMParser();
+        const krsFile = parser.parseFromString(fileData, 'application/xml');
+
+        const properties = krsFile.getElementsByTagName("properties")[0];
+        const fileName = properties.getAttribute("filename");
+        document.getElementById("template_name").value = fileName;
+        const config = krsFile.getElementsByTagName("config")[0];
+        const connection = config.getAttribute("connect");
+        document.getElementById("connection_dropdown").value = connection;
+        const mode = config.getAttribute("mode");
+        document.getElementById("mode_dropdown").value = mode;
+        const sound = config.getAttribute("sound");
+        document.getElementById(`${sound}`).checked = true;
+        const lock = config.getAttribute("lock");
+        document.getElementById(`${lock}`).checked = true;
+
+        const fileKeys = krsFile.getElementsByTagName("key");
+        console.log(fileKeys)
+        for (let key of fileKeys) {
+            const index = key.getAttribute("keynum") - 1;
+
+            const cell = document.getElementById(`${index}`);
+            const cellContent = cell.querySelector(".cell-content");
+            const keyContent = cellContent.querySelector(".key");
+            keyContent.textContent = "";
+
+            const keyPresses = key.getElementsByTagName("seq");
+            const newKeyPressArray = [];
+            
+            for (let keyPress of keyPresses) {
+                const string = keyPress.innerHTML;
+                keyContent.textContent += string;
+                const usage = keyPress.getAttribute("usage").replace("0x", "");
+                const modifier = keyPress.getAttribute("modifier").replace("0x", "");
+                const newKeyPress = new KeyPress(string, usage, modifier);
+                newKeyPressArray.push(newKeyPress)
+            }
+            const newKey = new Key(newKeyPressArray);
+            keys[index] = newKey
+            console.log(newKey);
+        }
+    }
+    reader.readAsText(file);
+})
+
 function configureButton(event) {
     const mode = document.getElementById("mode_dropdown").value;
     if (mode == "4") {
