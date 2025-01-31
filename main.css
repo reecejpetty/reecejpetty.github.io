@@ -5,7 +5,7 @@ body {
     font-family: monospace;
 }
 
-#pause_button, #template_name, #other_text, #pause_input, #reset_button, #add_button, #update_button, #mode_dropdown, #connection_dropdown, #other_buttons button, #generate_button, #copy_button, #download_button {
+#pause_button, #template_name, #other_text, #pause_input, #reset_button, #add_button, #update_button, #mode_dropdown, #connection_dropdown, #modifier_checks, #other_buttons button, #generate_button, #copy_button, #download_button {
     border: solid 1px black;
     font-family: monospace;
 }
@@ -17,13 +17,13 @@ input[type="file"] {
 .fileinput {
     border: 1px solid black;
     display: inline-block;
-    background-color: lightgray;
-    padding: 6px 8px;
+    background-color: #f6f6f6;
+    padding: 6px 4px 6px 8px;
     cursor: pointer;
 }
 
 .fileinput:hover {
-    background-color: darkgray;
+    background-color: gray;
 }
 
 #upload_name {
@@ -97,7 +97,7 @@ input[type="file"] {
 }
 
 #keys td.active:hover {
-    background-color: #dddd00;
+    background-color: #dddd22;
 }
 
 .key {
@@ -179,8 +179,9 @@ input[type="file"] {
     box-sizing: border-box;
 }
 
-#pause_button {
+#pause_button, #add_button {
     font-weight: bold;
+    background-color: lightgray;
 }
 
 #reset_button, #add_button, #update_button {
@@ -219,7 +220,7 @@ input[type="file"] {
 }
 
 #other_buttons {
-    background-color: lightgray;
+    background-color: gray;
     border: solid 1px black;
     display: flex;
     margin: 10px 0px 10px 0px;
@@ -263,6 +264,7 @@ input[type="file"] {
     margin-right: auto;
     font-size: large;
     font-weight: bold;
+    background-color: lightgray;
 }
 
 #download_button {
