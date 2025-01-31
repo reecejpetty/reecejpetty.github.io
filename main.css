@@ -5,7 +5,7 @@ body {
     font-family: monospace;
 }
 
-#pause_button, #template_name, #other_text, #pause_input, #reset_button, #add_button, #update_button, #mode_dropdown, #connection_dropdown, #modifier_checks, #other_buttons button, #generate_button, #copy_button, #download_button {
+#pause_button, #template_name, #other_text, #pause_input, #reset_button, #add_button, #update_button, #mode_dropdown, #connection_dropdown, #modifier_checks, #other_buttons button {
     border: solid 1.5px black;
     font-family: monospace;
 }
@@ -269,9 +269,11 @@ input[type="file"] {
     margin-bottom: 10px;
     margin-left: auto;
     margin-right: auto;
+    font-family: monospace;
     font-size: large;
     font-weight: bold;
     background-color: lightgray;
+    border: solid 2px black;
 }
 
 #download_button {
@@ -282,7 +284,7 @@ input[type="file"] {
     width: auto;
     visibility: hidden;
     background-color: lightgray;
-    border: solid 1px black;
+    border: solid 2px black;
     box-sizing: border-box;
     padding: 20px;
     white-space: pre-wrap;
