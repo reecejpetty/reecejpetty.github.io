@@ -522,8 +522,7 @@ function configureButton(event) {
     }
 }
 
-// Add a string to current key sequence
-function addStringToSequence() {
+function getModifierString() {
     const ctrlCheckbox = document.getElementById("ctrl");
     const shiftCheckbox = document.getElementById("shift");
     const altCheckbox = document.getElementById("alt");
@@ -532,21 +531,33 @@ function addStringToSequence() {
     let modifierString = "";
     for (const modifier of modifiers) {
         if (modifier.checked == true) {
-            modifierString += modifier.id + "+";
+            modifierString += modifier.id.toUpperCase() + "+";
         }
     }
+    return modifierString;
+}
+
+// Add a string to current key sequence
+function addStringToSequence() {
+    const modifierString = getModifierString();
 
     const keySequence = document.getElementById("key_sequence");
     let currentSequence = document.getElementById("current_sequence");
+    
     if (keySequence.value != "") {
         if (modifierString != "") {
-            currentSequence.textContent += `[${modifierString.toUpperCase()}${keySequence.value}]`;
+            currentSequence.textContent += `[${modifierString}${keySequence.value}]`;
         } else {
             currentSequence.textContent += keySequence.value;
         }
         for (const char of keySequence.value) {
-            const keyPress = new KeyPress(char, keyboardHexMap[char.toUpperCase()], convertToHex());
-            buildSequence.push(keyPress);
+            if (modifierString != "") {
+                const keyPress = new KeyPress(`[${modifierString}${char}]`, keyboardHexMap[char.toUpperCase()], convertToHex());
+                buildSequence.push(keyPress);
+            } else {
+                const keyPress = new KeyPress(char, keyboardHexMap[char.toUpperCase()], convertToHex());
+                buildSequence.push(keyPress);
+            }
         }
         keySequence.value = "";
     }
@@ -555,23 +566,20 @@ function addStringToSequence() {
 
 // Add "other" button to current key sequence
 function addButtonToSequence(event) {
-    const ctrlCheckbox = document.getElementById("ctrl");
-    const shiftCheckbox = document.getElementById("shift");
-    const altCheckbox = document.getElementById("alt");
-    const winCheckbox = document.getElementById("win");
-    const modifiers = [ctrlCheckbox, shiftCheckbox, altCheckbox, winCheckbox];
-    let modifierString = "";
-    for (const modifier of modifiers) {
-        if (modifier.checked == true) {
-            modifierString += modifier.id + "+";
-        }
-    }
+    const modifierString = getModifierString();
 
     const button = event.currentTarget;
     let currentSequence = document.getElementById("current_sequence");
-    currentSequence.textContent += `[${modifierString.toUpperCase()}${button.value}]`;
-    const keyPress = new KeyPress(button.value, keyboardHexMap[button.value], convertToHex());
-    buildSequence.push(keyPress);
+
+    if (modifierString != "") {
+        currentSequence.textContent += `[${modifierString}${button.value}]`;
+        const keyPress = new KeyPress(`[${modifierString}${button.value}]`, keyboardHexMap[button.value], convertToHex());
+        buildSequence.push(keyPress);
+    } else {
+        currentSequence.textContent += button.value;
+        const keyPress = new KeyPress(button.value, keyboardHexMap[button.value], convertToHex());
+        buildSequence.push(keyPress);
+    }
     clearModifiers();
     console.log(keys);
 }
