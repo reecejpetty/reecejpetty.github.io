@@ -64,6 +64,10 @@ input[type="file"] {
     box-sizing: border-box;
 }
 
+#connection_dropdown, #mode_dropdown, input[type="radio"], #speaker label, #lock_sound label, #keys td, input[type="checkbox"], #modifier_checks label, #pause_button, #reset_button, #add_button, #update_button, #generate_button, #download_button, #other_buttons button {
+    cursor: pointer;
+}
+
 #keys {
     margin-top: 10px;
 }
