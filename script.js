@@ -698,7 +698,7 @@ function createKRS() {
         xml += `        </key>\n`;
     }
     xml += `    </version>\n`;
-    xml += `</krsconfig>\n`;
+    xml += `</krs_config>\n`;
 
     const file = document.getElementById("file");
     file.style.visibility = "visible";
